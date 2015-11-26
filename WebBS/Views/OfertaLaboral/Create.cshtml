@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Titulo, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Titulo)
+                @Html.EditorFor(model => model.Titulo, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Titulo)
             </div>
         </div>
@@ -41,8 +41,11 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.FuncionesAdicionales,"Funciones Adicionales", new { @class = "control-label col-md-2" })
+            
+           
+            
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FuncionesAdicionales, new { @class = "col-md-8" })
+                @Html.TextAreaFor(model => model.FuncionesAdicionales, new { @class = "form-control", @rows="3"})
                 @Html.ValidationMessageFor(model => model.FuncionesAdicionales)
             </div>
         </div>
@@ -52,14 +55,20 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TiempoValidez)
                 @Html.ValidationMessageFor(model => model.TiempoValidez)
+
+                Dias
             </div>
+
+            
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.FechaCrea, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaCrea)
-                @Html.ValidationMessageFor(model => model.FechaCrea)
+            
+          
+            @Html.Label(""+DateTime.Now.ToShortDateString())
+              
             </div>
         </div>
 

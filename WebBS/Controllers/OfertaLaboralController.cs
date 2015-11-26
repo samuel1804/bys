@@ -18,6 +18,7 @@ namespace WebBS.Controllers
         public ActionResult Index()
         {
             var ofertalaboral = db.OfertaLaboral.Include(o => o.Perfil);
+
             return View(ofertalaboral.ToList());
         }
 
@@ -52,6 +53,9 @@ namespace WebBS.Controllers
         {
             if (ModelState.IsValid)
             {
+                OfertaLaboral last_oferta = db.OfertaLaboral.OrderByDescending(u => u.IdOfertaLaboral).FirstOrDefault();
+
+                ofertalaboral.IdOfertaLaboral = last_oferta.IdOfertaLaboral + 1;
                 db.OfertaLaboral.Add(ofertalaboral);
                 db.SaveChanges();
                 return RedirectToAction("Index");

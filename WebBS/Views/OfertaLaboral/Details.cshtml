@@ -1,14 +1,14 @@
 ﻿@model WebBS.Models.OfertaLaboral
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detales de la Oferta Laboral";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Detalles de la OfertaLaboral</h2>
 
 <div>
-    <h4>OfertaLaboral</h4>
+
 	<hr />
     <dl class="dl-horizontal">
         <dt>
@@ -54,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdOfertaLaboral }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdOfertaLaboral }) |
+    @Html.ActionLink("Regresar", "Index")
 </p>
