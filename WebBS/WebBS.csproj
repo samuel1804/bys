@@ -189,7 +189,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChoferController.cs" />
     <Compile Include="Controllers\NotaIngresoController.cs" />
+    <Compile Include="Controllers\OfertaLaboralController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +240,9 @@
     <Compile Include="Models\NotaSalida.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OfertaLaboral.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
@@ -261,6 +266,16 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\Chofer\Create.cshtml" />
+    <Content Include="Views\Chofer\Delete.cshtml" />
+    <Content Include="Views\Chofer\Details.cshtml" />
+    <Content Include="Views\Chofer\Edit.cshtml" />
+    <Content Include="Views\Chofer\Index.cshtml" />
+    <Content Include="Views\OfertaLaboral\Create.cshtml" />
+    <Content Include="Views\OfertaLaboral\Delete.cshtml" />
+    <Content Include="Views\OfertaLaboral\Details.cshtml" />
+    <Content Include="Views\OfertaLaboral\Edit.cshtml" />
+    <Content Include="Views\OfertaLaboral\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
