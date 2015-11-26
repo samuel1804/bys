@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link href="~/fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.js"></script>
+    <script src="~/Content/js/util.js"></script>
+    <script type="text/javascript">
+        var urlPath = '@Url.Content("~")';
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <img src="~/Content/images/logo.png" class="img-responsive" />        
+        </div>
+        <div id="bodycontent">                        
+            <div class="container-fluid">
+                <div class="form-group">
+                    <div class="text-right">
+                        <b>Usuario:</b><span>Juan Mallqui</span>&nbsp;&nbsp;
+                        <b>Rol:</b><span>Supervisor de Almacén</span>&nbsp;&nbsp;
+                        <b>Fecha:</b><span>@DateTime.Now.ToShortDateString()</span>
+                    </div>
+                </div>                
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <div class="list-group">                           
+                            <a href="#" class="list-group-item active">Gestión de Inventarios</a>                            
+                            <a href="~/NotaIngreso/Create" class="list-group-item">Registrar nota de ingreso</a>
+                            <a href="~/NotaIngreso/Index" class="list-group-item">Listar notas de ingreso</a>
+                            <a href="#" class="list-group-item">Registrar productos a almacenar</a>
+                            <a href="#" class="list-group-item">Generar lista Picking</a>
+                            <a href="#" class="list-group-item">Actualizar programación</a>
+                            <a href="#" class="list-group-item">Realizar Picking de Pedidos</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        @RenderBody()                                               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            
+        </div>
+    </div>
+</body>
+</html>
