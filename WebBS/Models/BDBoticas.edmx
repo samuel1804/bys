@@ -15,6 +15,13 @@
           <Property Name="UsuarioRegistro" Type="nchar" MaxLength="10" />
           <Property Name="FechaRegsitro" Type="datetime" />
         </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="IdArea" />
+          </Key>
+          <Property Name="IdArea" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Chofer">
           <Key>
             <PropertyRef Name="IdChofer" />
@@ -125,6 +132,7 @@
           <Property Name="IdPerfil" Type="int" Nullable="false" />
           <Property Name="FuncionesAdicionales" Type="varchar(max)" />
           <Property Name="TiempoValidez" Type="int" />
+          <Property Name="FechaCrea" Type="date" />
         </EntityType>
         <EntityType Name="Pedido">
           <Key>
@@ -138,6 +146,18 @@
           <Property Name="UsuarioRegistro" Type="nchar" MaxLength="20" />
           <Property Name="UsuarioAsignado" Type="nchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="int" Nullable="false" />
+          <Property Name="IdPuesto" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="Caracteristicas" Type="varchar(max)" />
+          <Property Name="SueldoIni" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SueldoFin" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="Productos">
           <Key>
             <PropertyRef Name="idProducto" />
@@ -146,6 +166,14 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
           <Property Name="UnidadMedida" Type="nvarchar" MaxLength="20" />
           <Property Name="Presentacion" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Puesto">
+          <Key>
+            <PropertyRef Name="IdPuesto" />
+          </Key>
+          <Property Name="IdPuesto" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="IdArea" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -187,8 +215,45 @@
           <Property Name="Tara" Type="int" />
           <Property Name="Descripcion" Type="varchar" MaxLength="255" />
         </EntityType>
+        <Association Name="FK_OfertaLaboral_Perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1" />
+          <End Role="OfertaLaboral" Type="Self.OfertaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="OfertaLaboral">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perfil_Puesto">
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="0..1" />
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puesto">
+              <PropertyRef Name="IdPuesto" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="IdPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Puesto_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="Puesto">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BDBoticasModelStoreContainer">
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chofer" EntityType="Self.Chofer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Control_Asignacion" EntityType="Self.Control_Asignacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleKardex" EntityType="Self.DetalleKardex" Schema="dbo" store:Type="Tables" />
@@ -200,11 +265,25 @@
           <EntitySet Name="NotaSalida" EntityType="Self.NotaSalida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OfertaLaboral" EntityType="Self.OfertaLaboral" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Puesto" EntityType="Self.Puesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UbicacionProducto" EntityType="Self.UbicacionProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OfertaLaboral_Perfil" Association="Self.FK_OfertaLaboral_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="OfertaLaboral" EntitySet="OfertaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perfil_Puesto" Association="Self.FK_Perfil_Puesto">
+            <End Role="Puesto" EntitySet="Puesto" />
+            <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Puesto_Area" Association="Self.FK_Puesto_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Puesto" EntitySet="Puesto" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -228,6 +307,21 @@
           <EntitySet Name="UbicacionProducto" EntityType="BDBoticasModel.UbicacionProducto" />
           <EntitySet Name="Vehiculo" EntityType="BDBoticasModel.Vehiculo" />
           <EntitySet Name="OfertaLaboral" EntityType="BDBoticasModel.OfertaLaboral" />
+          <EntitySet Name="Area" EntityType="BDBoticasModel.Area" />
+          <EntitySet Name="Perfil" EntityType="BDBoticasModel.Perfil" />
+          <EntitySet Name="Puesto" EntityType="BDBoticasModel.Puesto" />
+          <AssociationSet Name="FK_Puesto_Area" Association="BDBoticasModel.FK_Puesto_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Puesto" EntitySet="Puesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfertaLaboral_Perfil" Association="BDBoticasModel.FK_OfertaLaboral_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="OfertaLaboral" EntitySet="OfertaLaboral" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Perfil_Puesto" Association="BDBoticasModel.FK_Perfil_Puesto">
+            <End Role="Puesto" EntitySet="Puesto" />
+            <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Almacen">
           <Key>
@@ -410,7 +504,77 @@
           <Property Name="IdPerfil" Type="Int32" Nullable="false" />
           <Property Name="FuncionesAdicionales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TiempoValidez" Type="Int32" />
+          <Property Name="FechaCrea" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Perfil" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="OfertaLaboral" ToRole="Perfil" />
         </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="IdArea" />
+          </Key>
+          <Property Name="IdArea" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Puesto" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="Area" ToRole="Puesto" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="IdPerfil" />
+          </Key>
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+          <Property Name="IdPuesto" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SueldoIni" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SueldoFin" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="Perfil" ToRole="OfertaLaboral" />
+          <NavigationProperty Name="Puesto" Relationship="BDBoticasModel.FK_Perfil_Puesto" FromRole="Perfil" ToRole="Puesto" />
+        </EntityType>
+        <EntityType Name="Puesto">
+          <Key>
+            <PropertyRef Name="IdPuesto" />
+          </Key>
+          <Property Name="IdPuesto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdArea" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="Puesto" ToRole="Area" />
+          <NavigationProperty Name="Perfil" Relationship="BDBoticasModel.FK_Perfil_Puesto" FromRole="Puesto" ToRole="Perfil" />
+        </EntityType>
+        <Association Name="FK_Puesto_Area">
+          <End Type="BDBoticasModel.Area" Role="Area" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.Puesto" Role="Puesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="IdArea" />
+            </Principal>
+            <Dependent Role="Puesto">
+              <PropertyRef Name="IdArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfertaLaboral_Perfil">
+          <End Type="BDBoticasModel.Perfil" Role="Perfil" Multiplicity="1" />
+          <End Type="BDBoticasModel.OfertaLaboral" Role="OfertaLaboral" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="IdPerfil" />
+            </Principal>
+            <Dependent Role="OfertaLaboral">
+              <PropertyRef Name="IdPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Perfil_Puesto">
+          <End Type="BDBoticasModel.Puesto" Role="Puesto" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.Perfil" Role="Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puesto">
+              <PropertyRef Name="IdPuesto" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="IdPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -601,11 +765,42 @@
           <EntitySetMapping Name="OfertaLaboral">
             <EntityTypeMapping TypeName="BDBoticasModel.OfertaLaboral">
               <MappingFragment StoreEntitySet="OfertaLaboral">
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
                 <ScalarProperty Name="TiempoValidez" ColumnName="TiempoValidez" />
                 <ScalarProperty Name="FuncionesAdicionales" ColumnName="FuncionesAdicionales" />
                 <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
                 <ScalarProperty Name="IdOfertaLaboral" ColumnName="IdOfertaLaboral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="BDBoticasModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfil">
+            <EntityTypeMapping TypeName="BDBoticasModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="SueldoFin" ColumnName="SueldoFin" />
+                <ScalarProperty Name="SueldoIni" ColumnName="SueldoIni" />
+                <ScalarProperty Name="Caracteristicas" ColumnName="Caracteristicas" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPuesto" ColumnName="IdPuesto" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Puesto">
+            <EntityTypeMapping TypeName="BDBoticasModel.Puesto">
+              <MappingFragment StoreEntitySet="Puesto">
+                <ScalarProperty Name="IdArea" ColumnName="IdArea" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPuesto" ColumnName="IdPuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -42,5 +42,8 @@ namespace WebBS.Models
         public virtual DbSet<UbicacionProducto> UbicacionProducto { get; set; }
         public virtual DbSet<Vehiculo> Vehiculo { get; set; }
         public virtual DbSet<OfertaLaboral> OfertaLaboral { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<Perfil> Perfil { get; set; }
+        public virtual DbSet<Puesto> Puesto { get; set; }
     }
 }

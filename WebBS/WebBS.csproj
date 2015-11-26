@@ -199,6 +199,9 @@
     <Compile Include="Models\Almacen.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Area.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BDBoticas.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -247,7 +250,13 @@
     <Compile Include="Models\Pedido.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Perfil.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Productos.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Puesto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
