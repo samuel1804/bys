@@ -10,112 +10,112 @@ using WebBS.Models;
 
 namespace WebBS.Controllers
 {
-    public class OfertaLaboralController : Controller
+    public class PerfilController : Controller
     {
         private BDBoticasEntities db = new BDBoticasEntities();
 
-        // GET: /OfertaLaboral/
+        // GET: /Perfil/
         public ActionResult Index()
         {
-            var ofertalaboral = db.OfertaLaboral.Include(o => o.Perfil);
-            return View(ofertalaboral.ToList());
+            var perfil = db.Perfil.Include(p => p.Puesto);
+            return View(perfil.ToList());
         }
 
-        // GET: /OfertaLaboral/Details/5
+        // GET: /Perfil/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OfertaLaboral ofertalaboral = db.OfertaLaboral.Find(id);
-            if (ofertalaboral == null)
+            Perfil perfil = db.Perfil.Find(id);
+            if (perfil == null)
             {
                 return HttpNotFound();
             }
-            return View(ofertalaboral);
+            return View(perfil);
         }
 
-        // GET: /OfertaLaboral/Create
+        // GET: /Perfil/Create
         public ActionResult Create()
         {
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre");
+            ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
         }
 
-        // POST: /OfertaLaboral/Create
+        // POST: /Perfil/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,FuncionesAdicionales,TiempoValidez,FechaCrea")] OfertaLaboral ofertalaboral)
+        public ActionResult Create([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Caracteristicas,SueldoIni,SueldoFin")] Perfil perfil)
         {
             if (ModelState.IsValid)
             {
-                db.OfertaLaboral.Add(ofertalaboral);
+                db.Perfil.Add(perfil);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre", ofertalaboral.IdPerfil);
-            return View(ofertalaboral);
+            ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre", perfil.IdPuesto);
+            return View(perfil);
         }
 
-        // GET: /OfertaLaboral/Edit/5
+        // GET: /Perfil/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OfertaLaboral ofertalaboral = db.OfertaLaboral.Find(id);
-            if (ofertalaboral == null)
+            Perfil perfil = db.Perfil.Find(id);
+            if (perfil == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre", ofertalaboral.IdPerfil);
-            return View(ofertalaboral);
+            ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre", perfil.IdPuesto);
+            return View(perfil);
         }
 
-        // POST: /OfertaLaboral/Edit/5
+        // POST: /Perfil/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,FuncionesAdicionales,TiempoValidez,FechaCrea")] OfertaLaboral ofertalaboral)
+        public ActionResult Edit([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Caracteristicas,SueldoIni,SueldoFin")] Perfil perfil)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ofertalaboral).State = EntityState.Modified;
+                db.Entry(perfil).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre", ofertalaboral.IdPerfil);
-            return View(ofertalaboral);
+            ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre", perfil.IdPuesto);
+            return View(perfil);
         }
 
-        // GET: /OfertaLaboral/Delete/5
+        // GET: /Perfil/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OfertaLaboral ofertalaboral = db.OfertaLaboral.Find(id);
-            if (ofertalaboral == null)
+            Perfil perfil = db.Perfil.Find(id);
+            if (perfil == null)
             {
                 return HttpNotFound();
             }
-            return View(ofertalaboral);
+            return View(perfil);
         }
 
-        // POST: /OfertaLaboral/Delete/5
+        // POST: /Perfil/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OfertaLaboral ofertalaboral = db.OfertaLaboral.Find(id);
-            db.OfertaLaboral.Remove(ofertalaboral);
+            Perfil perfil = db.Perfil.Find(id);
+            db.Perfil.Remove(perfil);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,113 +1,58 @@
 ﻿@model IEnumerable<WebBS.Models.OfertaLaboral>
 
 @{
-    ViewBag.Title = "Ofertas Laborales";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Index</h2>
 
-<div class="panel panel-default">
-    <h4 class="panel-heading">Lista de Ofertas Laborales</h4>
-    <div class="panel-body">
-        <div class="form-horizontal">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group form-group-sm">
-                        <label class="control-label col-md-2 col-sm-4 col-xs-12">Titulo:</label>
-                        <div class="col-md-9 col-sm-8 col-xs-12">
-                            
-                                <input type="text" class="form-control" />
-                                
-                               
-                            </div>
-                        </div>
-                    </div>
-                <div class="col-md-2">
-                    <div class="form-group form-group-sm">
-                        <div class="col-xs-12">
-                            <button type="button" class="btn btn-default btn-sm form-control">
-                                <i class="fa fa-fw fa-search"></i>Buscar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <a class="btn btn-primary" href="~/OfertaLaboral/Create">Nuevo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Codigo</th>
-                            <th class="text-center">Titulo</th>
-                            <th class="text-center">Perfil</th>
-                            <th class="text-center">Fecha Creación</th>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuncionesAdicionales)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoValidez)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCrea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfil.Nombre)
+        </th>
+        <th></th>
+    </tr>
 
-                        </tr>
-                    </thead>
-                    <tbody data-bind="foreach: ofertalaboral">
-                        <tr>
-                            <td class="text-center">
-                                <i class="fa fa-fw fa-search" data-bind="click: $root.ver"></i>
-                                <i class="fa fa-fw fa-pencil" data-bind="click: $root.editar"></i>
-                                <i class="fa fa-fw fa-trash-o" data-bind="click: $root.eliminar"></i>
-                            </td>
-                            <td class="text-center" data-bind="text: $data.IdOfertaLaboral"></td>
-                            <td class="text-center" data-bind="text: $data.Titulo"></td>
-                            <td class="text-center" data-bind="text: $data.Perfil"></td>
-                            <td class="text-center" data-bind="text: util.date.format($data.Fecha, 'dd/MM/yyyy hh:mm tt')"></td>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FuncionesAdicionales)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiempoValidez)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCrea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfil.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdOfertaLaboral }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdOfertaLaboral }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdOfertaLaboral })
+        </td>
+    </tr>
+}
 
-                            <td data-bind="text: $data.Observaciones"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="modal-nota" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-full-screen" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nota de Ingreso</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Nro Nota Ingreso:</label>
-                        <input type="text" class="form-control" data-bind="value: NotaIngreso.NumeroNotaIngreso" />
-                    </div>
-                    <div class="form-group">
-                        <label>Fecha:</label>
-                        <input type="text" class="form-control" data-bind="value: NotaIngreso.Fecha" />
-                    </div>
-                    <div class="form-group">
-                        <label>Nro Orden Compra:</label>
-                        <input type="text" class="form-control" data-bind="value: NotaIngreso.NumeroOrdenCompra" />
-                    </div>
-                    <div class="form-group">
-                        <label>Usuario Recibo:</label>
-                        <input type="text" class="form-control" data-bind="value: NotaIngreso.UsuarioRecibo" />
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="~/Content/js/ViewModel/NotaIngreso.js"></script>
-
-
+</table>
