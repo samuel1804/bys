@@ -17,7 +17,7 @@ namespace WebBS.Controllers
         // GET: /OfertaLaboral/
         public ActionResult Index()
         {
-            return View(db.OfertaLaboral.ToList());
+            return View();
         }
 
         // GET: /OfertaLaboral/Details/5

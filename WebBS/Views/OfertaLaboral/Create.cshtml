@@ -1,69 +1,110 @@
 ﻿@model WebBS.Models.OfertaLaboral
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Oferta Laboral";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>OfertaLaboral</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdOfertaLaboral, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdOfertaLaboral)
-                @Html.ValidationMessageFor(model => model.IdOfertaLaboral)
+<div class="panel panel-default">
+    <h4 class="panel-heading">Registrar Oferta Laboral</h4>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Titulo:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" />
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Titulo, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Titulo)
-                @Html.ValidationMessageFor(model => model.Titulo)
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Supervisor Almacén:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" class="form-control text-uppercase" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Almacén:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdPerfil, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdPerfil)
-                @Html.ValidationMessageFor(model => model.IdPerfil)
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Nro Orden Compra:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Proveedor:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FuncionesAdicionales, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FuncionesAdicionales)
-                @Html.ValidationMessageFor(model => model.FuncionesAdicionales)
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Nro Guia Provedor:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-sm">
+                        <label class="control-label col-md-4 col-sm-4 col-xs-12">Observaciones:</label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TiempoValidez, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TiempoValidez)
-                @Html.ValidationMessageFor(model => model.TiempoValidez)
+            <div class="form-group">
+                <div class="col-xs-12 text-right">
+                    <button type="button" class="btn btn-primary">Agregar item</button>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Eliminar</th>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Unidad de Medida</th>
+                            <th>Cantidad</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
