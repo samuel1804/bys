@@ -268,6 +268,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_DetalleReceta_Buscar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WHERE" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_Kardex_ObtenerUltimoMovimiento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WHERE" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_Orden_Anular" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_OrdenPreparado_Actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Orden" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Tecnico_Farmaceutico" Type="nvarchar" Mode="In" />
+          <Parameter Name="Receta_Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="Codigo_Sucursal" Type="nvarchar" Mode="In" />
+          <Parameter Name="Codigo_Receta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Estado" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_OrdenPreparado_Crear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Orden" Type="nvarchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Tecnico_Farmaceutico" Type="nvarchar" Mode="In" />
+          <Parameter Name="Receta_Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="Codigo_Sucursal" Type="nvarchar" Mode="In" />
+          <Parameter Name="Codigo_Receta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Estado" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Receta_Buscar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WHERE" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_Table_List" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Tabla" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Table_List_Codigo_Orden" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filtro" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Table_List_Nom_Receta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filtro" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Table_List_Nom_Sucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="filtro" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Table_List_Todos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Tabla" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_Chofer_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BDBoticasModelStoreContainer">
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
@@ -348,6 +394,52 @@
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="OfertaLaboral" EntitySet="OfertaLaboral" />
           </AssociationSet>
+          <FunctionImport Name="sp_DetalleReceta_Buscar">
+            <Parameter Name="WHERE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Kardex_ObtenerUltimoMovimiento">
+            <Parameter Name="WHERE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Orden_Anular">
+            <Parameter Name="codigo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_OrdenPreparado_Actualizar">
+            <Parameter Name="Codigo_Orden" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Tecnico_Farmaceutico" Mode="In" Type="String" />
+            <Parameter Name="Receta_Cliente" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Sucursal" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Receta" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_OrdenPreparado_Crear">
+            <Parameter Name="Codigo_Orden" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Tecnico_Farmaceutico" Mode="In" Type="String" />
+            <Parameter Name="Receta_Cliente" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Sucursal" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Receta" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Receta_Buscar">
+            <Parameter Name="WHERE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Table_List">
+            <Parameter Name="Tabla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Table_List_Codigo_Orden">
+            <Parameter Name="filtro" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Table_List_Nom_Receta">
+            <Parameter Name="filtro" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Table_List_Nom_Sucursal">
+            <Parameter Name="filtro" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Table_List_Todos">
+            <Parameter Name="Tabla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Chofer_GetAll" ReturnType="Collection(BDBoticasModel.usp_Chofer_GetAll_Result)" />
         </EntityContainer>
         <EntityType Name="Almacen">
           <Key>
@@ -630,6 +722,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="usp_Chofer_GetAll_Result">
+          <Property Type="Int32" Name="IdChofer" Nullable="false" />
+          <Property Type="String" Name="NroDoc" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Nombres" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="NroTelefono" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NroLicencia" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CateLicencia" Nullable="true" MaxLength="255" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -864,6 +965,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_DetalleReceta_Buscar" FunctionName="BDBoticasModel.Store.sp_DetalleReceta_Buscar" />
+          <FunctionImportMapping FunctionImportName="sp_Kardex_ObtenerUltimoMovimiento" FunctionName="BDBoticasModel.Store.sp_Kardex_ObtenerUltimoMovimiento" />
+          <FunctionImportMapping FunctionImportName="sp_Orden_Anular" FunctionName="BDBoticasModel.Store.sp_Orden_Anular" />
+          <FunctionImportMapping FunctionImportName="sp_OrdenPreparado_Actualizar" FunctionName="BDBoticasModel.Store.sp_OrdenPreparado_Actualizar" />
+          <FunctionImportMapping FunctionImportName="sp_OrdenPreparado_Crear" FunctionName="BDBoticasModel.Store.sp_OrdenPreparado_Crear" />
+          <FunctionImportMapping FunctionImportName="sp_Receta_Buscar" FunctionName="BDBoticasModel.Store.sp_Receta_Buscar" />
+          <FunctionImportMapping FunctionImportName="sp_Table_List" FunctionName="BDBoticasModel.Store.sp_Table_List" />
+          <FunctionImportMapping FunctionImportName="sp_Table_List_Codigo_Orden" FunctionName="BDBoticasModel.Store.sp_Table_List_Codigo_Orden" />
+          <FunctionImportMapping FunctionImportName="sp_Table_List_Nom_Receta" FunctionName="BDBoticasModel.Store.sp_Table_List_Nom_Receta" />
+          <FunctionImportMapping FunctionImportName="sp_Table_List_Nom_Sucursal" FunctionName="BDBoticasModel.Store.sp_Table_List_Nom_Sucursal" />
+          <FunctionImportMapping FunctionImportName="sp_Table_List_Todos" FunctionName="BDBoticasModel.Store.sp_Table_List_Todos" />
+          <FunctionImportMapping FunctionImportName="usp_Chofer_GetAll" FunctionName="BDBoticasModel.Store.usp_Chofer_GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDBoticasModel.usp_Chofer_GetAll_Result">
+                <ScalarProperty Name="IdChofer" ColumnName="IdChofer" />
+                <ScalarProperty Name="NroDoc" ColumnName="NroDoc" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="NroTelefono" ColumnName="NroTelefono" />
+                <ScalarProperty Name="NroLicencia" ColumnName="NroLicencia" />
+                <ScalarProperty Name="CateLicencia" ColumnName="CateLicencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

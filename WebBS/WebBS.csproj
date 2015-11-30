@@ -279,6 +279,9 @@
     <Compile Include="Models\UbicacionProducto.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_Chofer_GetAll_Result.cs">
+      <DependentUpon>BDBoticas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Vehiculo.cs">
       <DependentUpon>BDBoticas.tt</DependentUpon>
     </Compile>
