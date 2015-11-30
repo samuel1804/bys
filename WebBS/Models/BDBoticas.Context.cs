@@ -45,5 +45,6 @@ namespace WebBS.Models
         public virtual DbSet<Area> Area { get; set; }
         public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<Puesto> Puesto { get; set; }
+        public virtual DbSet<Sucursal> Sucursal { get; set; }
     }
 }

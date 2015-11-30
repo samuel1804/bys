@@ -28,6 +28,8 @@
         <AssociationConnector Association="BDBoticasModel.FK_Puesto_Area" />
         <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Perfil" />
         <AssociationConnector Association="BDBoticasModel.FK_Perfil_Puesto" />
+        <EntityTypeShape EntityType="BDBoticasModel.Sucursal" Width="1.5" PointX="7.375" PointY="10.875" />
+        <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Sucursal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
