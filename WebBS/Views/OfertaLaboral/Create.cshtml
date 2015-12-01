@@ -1,28 +1,22 @@
 ﻿@model WebBS.Models.OfertaLaboral
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Registrar Oferta Laboral";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Registrar Oferta Laboral</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>OfertaLaboral</h4>
+        
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdOfertaLaboral, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdOfertaLaboral)
-                @Html.ValidationMessageFor(model => model.IdOfertaLaboral)
-            </div>
-        </div>
+    
 
         <div class="form-group">
             @Html.LabelFor(model => model.Titulo, new { @class = "control-label col-md-2" })
@@ -33,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdPerfil, "IdPerfil", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdPerfil, "Perfil", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IdPerfil", String.Empty)
                 @Html.ValidationMessageFor(model => model.IdPerfil)
@@ -41,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdSucursal, "IdSucursal", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IdSucursal, "Sucursal", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IdSucursal", String.Empty)
                 @Html.ValidationMessageFor(model => model.IdSucursal)
@@ -49,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FuncionesAdicionales, new { @class = "control-label col-md-2" })
+            @Html.Label("Funciones Adicionales", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FuncionesAdicionales)
                 @Html.ValidationMessageFor(model => model.FuncionesAdicionales)
@@ -57,37 +51,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TiempoValidez, new { @class = "control-label col-md-2" })
+            @Html.Label("Tiempo Validez", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TiempoValidez)
                 @Html.ValidationMessageFor(model => model.TiempoValidez)
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaCrea, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaCrea)
-                @Html.ValidationMessageFor(model => model.FechaCrea)
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdEstado, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdEstado)
-                @Html.ValidationMessageFor(model => model.IdEstado)
-            </div>
-        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Registrar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Index")
 </div>

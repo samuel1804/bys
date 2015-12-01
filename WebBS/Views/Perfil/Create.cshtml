@@ -16,13 +16,7 @@
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdPerfil, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdPerfil)
-                @Html.ValidationMessageFor(model => model.IdPerfil)
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.IdPuesto, "Puesto", new { @class = "control-label col-md-2" })
@@ -57,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SueldoIni, new { @class = "control-label col-md-2" })
+            @Html.Label("Sueldo Inicial", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SueldoIni)
                 @Html.ValidationMessageFor(model => model.SueldoIni)
@@ -65,7 +59,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SueldoFin, new { @class = "control-label col-md-2" })
+            @Html.Label("Sueldo Final", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SueldoFin)
                 @Html.ValidationMessageFor(model => model.SueldoFin)
@@ -74,12 +68,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Registrar" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regresar", "Index")
 </div>
