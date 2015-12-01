@@ -48,10 +48,12 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Caracteristicas,SueldoIni,SueldoFin")] Perfil perfil)
+        public ActionResult Create([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Competencias,Caracteristicas,SueldoIni,SueldoFin,Estado")] Perfil perfil)
         {
             if (ModelState.IsValid)
             {
+                perfil.IdPerfil = db.Perfil.OrderBy(t => t.IdPerfil).FirstOrDefault().IdPerfil + 1;
+                perfil.Estado = 1;
                 db.Perfil.Add(perfil);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,7 +84,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Caracteristicas,SueldoIni,SueldoFin")] Perfil perfil)
+        public ActionResult Edit([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Competencias,Caracteristicas,SueldoIni,SueldoFin,Estado")] Perfil perfil)
         {
             if (ModelState.IsValid)
             {

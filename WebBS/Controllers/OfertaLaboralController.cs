@@ -49,10 +49,13 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,IdEstado")] OfertaLaboral ofertalaboral)
+        public ActionResult Create([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,Estado")] OfertaLaboral ofertalaboral)
         {
+
             if (ModelState.IsValid)
             {
+                ofertalaboral.IdOfertaLaboral = db.OfertaLaboral.OrderByDescending(t => t.IdOfertaLaboral).FirstOrDefault().IdOfertaLaboral+1;
+                ofertalaboral.Estado = 1;
                 db.OfertaLaboral.Add(ofertalaboral);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,7 +88,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,IdEstado")] OfertaLaboral ofertalaboral)
+        public ActionResult Edit([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,Estado")] OfertaLaboral ofertalaboral)
         {
             if (ModelState.IsValid)
             {

@@ -7,21 +7,22 @@
 
 <h2>Registrar Oferta Laboral</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        
+
         <hr />
         @Html.ValidationSummary(true)
 
-    
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Titulo, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Titulo)
+             
+                @Html.EditorFor(model => model.Titulo, new { @class = "form-control", @placeholder = "Ingrese un Titulo" ,@required }) 
                 @Html.ValidationMessageFor(model => model.Titulo)
             </div>
         </div>
@@ -45,7 +46,7 @@
         <div class="form-group">
             @Html.Label("Funciones Adicionales", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FuncionesAdicionales)
+                @Html.TextAreaFor(model => model.FuncionesAdicionales, new { @class = "form-control col-md-10", @placeholder = "Ingrese las Funciones Adicionales que desempeñara el empleado", @rows = 3 })
                 @Html.ValidationMessageFor(model => model.FuncionesAdicionales)
             </div>
         </div>

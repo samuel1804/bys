@@ -20,16 +20,16 @@ namespace WebBS.Models
         }
     
         public int IdPerfil { get; set; }
-        public Nullable<int> IdPuesto { get; set; }
+        public int IdPuesto { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Competencias { get; set; }
         public string Caracteristicas { get; set; }
         public Nullable<decimal> SueldoIni { get; set; }
         public Nullable<decimal> SueldoFin { get; set; }
-        public double Estado { get; set; }
+        public int Estado { get; set; }
     
-        public virtual ICollection<OfertaLaboral> OfertaLaboral { get; set; }
         public virtual Puesto Puesto { get; set; }
+        public virtual ICollection<OfertaLaboral> OfertaLaboral { get; set; }
     }
 }

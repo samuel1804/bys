@@ -12,18 +12,18 @@ namespace WebBS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Sucursal
+    public partial class OfertaLaboral
     {
-        public Sucursal()
-        {
-            this.OfertaLaboral = new HashSet<OfertaLaboral>();
-        }
-    
-        public int IdSurcursal { get; set; }
-        public string Nombre { get; set; }
-        public string Direccion { get; set; }
+        public int IdOfertaLaboral { get; set; }
+        public string Titulo { get; set; }
+        public int IdPerfil { get; set; }
+        public int IdSucursal { get; set; }
+        public string FuncionesAdicionales { get; set; }
+        public Nullable<int> TiempoValidez { get; set; }
+        public Nullable<System.DateTime> FechaCrea { get; set; }
         public int Estado { get; set; }
     
-        public virtual ICollection<OfertaLaboral> OfertaLaboral { get; set; }
+        public virtual Perfil Perfil { get; set; }
+        public virtual Sucursal Sucursal { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace WebBS.Models
     
         public int IdArea { get; set; }
         public string Nombre { get; set; }
-        public double Estado { get; set; }
+        public int Estado { get; set; }
     
         public virtual ICollection<Puesto> Puesto { get; set; }
     }

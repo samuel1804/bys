@@ -21,7 +21,7 @@
           </Key>
           <Property Name="IdArea" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Estado" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Chofer">
           <Key>
@@ -131,11 +131,11 @@
           <Property Name="IdOfertaLaboral" Type="int" Nullable="false" />
           <Property Name="Titulo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdPerfil" Type="int" Nullable="false" />
-          <Property Name="IdSucursal" Type="int" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
           <Property Name="FuncionesAdicionales" Type="varchar(max)" />
           <Property Name="TiempoValidez" Type="int" />
           <Property Name="FechaCrea" Type="date" />
-          <Property Name="IdEstado" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Pedido">
           <Key>
@@ -154,14 +154,14 @@
             <PropertyRef Name="IdPerfil" />
           </Key>
           <Property Name="IdPerfil" Type="int" Nullable="false" />
-          <Property Name="IdPuesto" Type="int" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="IdPuesto" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
           <Property Name="Competencias" Type="varchar(max)" />
           <Property Name="Caracteristicas" Type="varchar(max)" />
           <Property Name="SueldoIni" Type="decimal" Precision="10" Scale="2" />
           <Property Name="SueldoFin" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="Estado" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -179,7 +179,7 @@
           <Property Name="IdPuesto" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="IdArea" Type="int" />
-          <Property Name="Estado" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sucursal">
           <Key>
@@ -188,7 +188,7 @@
           <Property Name="IdSurcursal" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Direccion" Type="varchar" MaxLength="200" />
-          <Property Name="Estado" Type="float" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Ubicacion">
           <Key>
@@ -233,7 +233,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OfertaLaboral_Sucursal">
-          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
           <End Role="OfertaLaboral" Type="Self.OfertaLaboral" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
@@ -245,7 +245,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Perfil_Puesto">
-          <End Role="Puesto" Type="Self.Puesto" Multiplicity="0..1" />
+          <End Role="Puesto" Type="Self.Puesto" Multiplicity="1" />
           <End Role="Perfil" Type="Self.Perfil" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Puesto">
@@ -414,7 +414,6 @@
           <EntitySet Name="Kardex" EntityType="BDBoticasModel.Kardex" />
           <EntitySet Name="NotaIngreso" EntityType="BDBoticasModel.NotaIngreso" />
           <EntitySet Name="NotaSalida" EntityType="BDBoticasModel.NotaSalida" />
-          <EntitySet Name="OfertaLaboral" EntityType="BDBoticasModel.OfertaLaboral" />
           <EntitySet Name="Pedido" EntityType="BDBoticasModel.Pedido" />
           <EntitySet Name="Perfil" EntityType="BDBoticasModel.Perfil" />
           <EntitySet Name="Productos" EntityType="BDBoticasModel.Productos" />
@@ -427,6 +426,11 @@
             <End Role="Area" EntitySet="Area" />
             <End Role="Puesto" EntitySet="Puesto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Perfil_Puesto" Association="BDBoticasModel.FK_Perfil_Puesto">
+            <End Role="Puesto" EntitySet="Puesto" />
+            <End Role="Perfil" EntitySet="Perfil" />
+          </AssociationSet>
+          <EntitySet Name="OfertaLaboral" EntityType="BDBoticasModel.OfertaLaboral" />
           <AssociationSet Name="FK_OfertaLaboral_Perfil" Association="BDBoticasModel.FK_OfertaLaboral_Perfil">
             <End Role="Perfil" EntitySet="Perfil" />
             <End Role="OfertaLaboral" EntitySet="OfertaLaboral" />
@@ -435,11 +439,7 @@
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="OfertaLaboral" EntitySet="OfertaLaboral" />
           </AssociationSet>
-          <AssociationSet Name="FK_Perfil_Puesto" Association="BDBoticasModel.FK_Perfil_Puesto">
-            <End Role="Puesto" EntitySet="Puesto" />
-            <End Role="Perfil" EntitySet="Perfil" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="usp_Chofer_GetAll_Result">
           <Property Type="Int32" Name="IdChofer" Nullable="false" />
           <Property Type="String" Name="NroDoc" Nullable="true" MaxLength="10" />
@@ -465,7 +465,7 @@
           </Key>
           <Property Name="IdArea" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Double" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Puesto" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="Area" ToRole="Puesto" />
         </EntityType>
         <EntityType Name="Chofer">
@@ -569,21 +569,6 @@
           <Property Name="UsuarioPicking" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="OfertaLaboral">
-          <Key>
-            <PropertyRef Name="IdOfertaLaboral" />
-          </Key>
-          <Property Name="IdOfertaLaboral" Type="Int32" Nullable="false" />
-          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <Property Name="FuncionesAdicionales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TiempoValidez" Type="Int32" />
-          <Property Name="FechaCrea" Type="DateTime" Precision="0" />
-          <Property Name="IdEstado" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Perfil" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="OfertaLaboral" ToRole="Perfil" />
-          <NavigationProperty Name="Sucursal" Relationship="BDBoticasModel.FK_OfertaLaboral_Sucursal" FromRole="OfertaLaboral" ToRole="Sucursal" />
-        </EntityType>
         <EntityType Name="Pedido">
           <Key>
             <PropertyRef Name="NumeroPedido" />
@@ -601,16 +586,16 @@
             <PropertyRef Name="IdPerfil" />
           </Key>
           <Property Name="IdPerfil" Type="Int32" Nullable="false" />
-          <Property Name="IdPuesto" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPuesto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Competencias" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="SueldoIni" Type="Decimal" Precision="10" Scale="2" />
           <Property Name="SueldoFin" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Estado" Type="Double" Nullable="false" />
-          <NavigationProperty Name="OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="Perfil" ToRole="OfertaLaboral" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Puesto" Relationship="BDBoticasModel.FK_Perfil_Puesto" FromRole="Perfil" ToRole="Puesto" />
+          <NavigationProperty Name="OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="Perfil" ToRole="OfertaLaboral" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -628,7 +613,7 @@
           <Property Name="IdPuesto" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdArea" Type="Int32" />
-          <Property Name="Estado" Type="Double" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Area" Relationship="BDBoticasModel.FK_Puesto_Area" FromRole="Puesto" ToRole="Area" />
           <NavigationProperty Name="Perfil" Relationship="BDBoticasModel.FK_Perfil_Puesto" FromRole="Puesto" ToRole="Perfil" />
         </EntityType>
@@ -639,7 +624,7 @@
           <Property Name="IdSurcursal" Type="Int32" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Double" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OfertaLaboral" Relationship="BDBoticasModel.FK_OfertaLaboral_Sucursal" FromRole="Sucursal" ToRole="OfertaLaboral" />
         </EntityType>
         <EntityType Name="Ubicacion">
@@ -684,6 +669,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Perfil_Puesto">
+          <End Type="BDBoticasModel.Puesto" Role="Puesto" Multiplicity="1" />
+          <End Type="BDBoticasModel.Perfil" Role="Perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puesto">
+              <PropertyRef Name="IdPuesto" />
+            </Principal>
+            <Dependent Role="Perfil">
+              <PropertyRef Name="IdPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OfertaLaboral">
+          <Key>
+            <PropertyRef Name="IdOfertaLaboral" />
+          </Key>
+          <Property Name="IdOfertaLaboral" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPerfil" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="FuncionesAdicionales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TiempoValidez" Type="Int32" />
+          <Property Name="FechaCrea" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Perfil" Relationship="BDBoticasModel.FK_OfertaLaboral_Perfil" FromRole="OfertaLaboral" ToRole="Perfil" />
+          <NavigationProperty Name="Sucursal" Relationship="BDBoticasModel.FK_OfertaLaboral_Sucursal" FromRole="OfertaLaboral" ToRole="Sucursal" />
+        </EntityType>
         <Association Name="FK_OfertaLaboral_Perfil">
           <End Type="BDBoticasModel.Perfil" Role="Perfil" Multiplicity="1" />
           <End Type="BDBoticasModel.OfertaLaboral" Role="OfertaLaboral" Multiplicity="*" />
@@ -697,7 +709,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OfertaLaboral_Sucursal">
-          <End Type="BDBoticasModel.Sucursal" Role="Sucursal" Multiplicity="0..1" />
+          <End Type="BDBoticasModel.Sucursal" Role="Sucursal" Multiplicity="1" />
           <End Type="BDBoticasModel.OfertaLaboral" Role="OfertaLaboral" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
@@ -705,18 +717,6 @@
             </Principal>
             <Dependent Role="OfertaLaboral">
               <PropertyRef Name="IdSucursal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Perfil_Puesto">
-          <End Type="BDBoticasModel.Puesto" Role="Puesto" Multiplicity="0..1" />
-          <End Type="BDBoticasModel.Perfil" Role="Perfil" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Puesto">
-              <PropertyRef Name="IdPuesto" />
-            </Principal>
-            <Dependent Role="Perfil">
-              <PropertyRef Name="IdPuesto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -873,20 +873,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OfertaLaboral">
-            <EntityTypeMapping TypeName="BDBoticasModel.OfertaLaboral">
-              <MappingFragment StoreEntitySet="OfertaLaboral">
-                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
-                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
-                <ScalarProperty Name="TiempoValidez" ColumnName="TiempoValidez" />
-                <ScalarProperty Name="FuncionesAdicionales" ColumnName="FuncionesAdicionales" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="IdOfertaLaboral" ColumnName="IdOfertaLaboral" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Pedido">
             <EntityTypeMapping TypeName="BDBoticasModel.Pedido">
               <MappingFragment StoreEntitySet="Pedido">
@@ -975,6 +961,20 @@
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
                 <ScalarProperty Name="Placa" ColumnName="Placa" />
                 <ScalarProperty Name="IdVehiculo" ColumnName="IdVehiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfertaLaboral">
+            <EntityTypeMapping TypeName="BDBoticasModel.OfertaLaboral">
+              <MappingFragment StoreEntitySet="OfertaLaboral">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaCrea" ColumnName="FechaCrea" />
+                <ScalarProperty Name="TiempoValidez" ColumnName="TiempoValidez" />
+                <ScalarProperty Name="FuncionesAdicionales" ColumnName="FuncionesAdicionales" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPerfil" ColumnName="IdPerfil" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="IdOfertaLaboral" ColumnName="IdOfertaLaboral" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

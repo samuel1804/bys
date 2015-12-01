@@ -38,7 +38,6 @@ namespace WebBS.Models
         public virtual DbSet<Kardex> Kardex { get; set; }
         public virtual DbSet<NotaIngreso> NotaIngreso { get; set; }
         public virtual DbSet<NotaSalida> NotaSalida { get; set; }
-        public virtual DbSet<OfertaLaboral> OfertaLaboral { get; set; }
         public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<Perfil> Perfil { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
@@ -47,6 +46,7 @@ namespace WebBS.Models
         public virtual DbSet<Ubicacion> Ubicacion { get; set; }
         public virtual DbSet<UbicacionProducto> UbicacionProducto { get; set; }
         public virtual DbSet<Vehiculo> Vehiculo { get; set; }
+        public virtual DbSet<OfertaLaboral> OfertaLaboral { get; set; }
     
         public virtual int sp_DetalleReceta_Buscar(string wHERE)
         {

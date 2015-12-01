@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="BDBoticasModel.Kardex" Width="1.5" PointX="9.75" PointY="3.75" />
         <EntityTypeShape EntityType="BDBoticasModel.NotaIngreso" Width="1.5" PointX="9.75" PointY="6.75" />
         <EntityTypeShape EntityType="BDBoticasModel.NotaSalida" Width="1.5" PointX="9.75" PointY="9.75" />
-        <EntityTypeShape EntityType="BDBoticasModel.OfertaLaboral" Width="1.5" PointX="7.5" PointY="1" />
         <EntityTypeShape EntityType="BDBoticasModel.Pedido" Width="1.5" PointX="6.75" PointY="10.75" />
         <EntityTypeShape EntityType="BDBoticasModel.Perfil" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="BDBoticasModel.Productos" Width="1.5" PointX="11.75" PointY="0.75" />
@@ -26,9 +25,10 @@
         <EntityTypeShape EntityType="BDBoticasModel.UbicacionProducto" Width="1.5" PointX="2.75" PointY="11.75" />
         <EntityTypeShape EntityType="BDBoticasModel.Vehiculo" Width="1.5" PointX="11.75" PointY="3.75" />
         <AssociationConnector Association="BDBoticasModel.FK_Puesto_Area" />
+        <AssociationConnector Association="BDBoticasModel.FK_Perfil_Puesto" />
+        <EntityTypeShape EntityType="BDBoticasModel.OfertaLaboral" Width="1.5" PointX="7.5" PointY="0.875" />
         <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Perfil" />
         <AssociationConnector Association="BDBoticasModel.FK_OfertaLaboral_Sucursal" />
-        <AssociationConnector Association="BDBoticasModel.FK_Perfil_Puesto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
