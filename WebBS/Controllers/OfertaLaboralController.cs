@@ -17,8 +17,7 @@ namespace WebBS.Controllers
         // GET: /OfertaLaboral/
         public ActionResult Index()
         {
-            var ofertalaboral = db.OfertaLaboral.Include(o => o.Perfil);
-
+            var ofertalaboral = db.OfertaLaboral.Include(o => o.Perfil).Include(o => o.Sucursal);
             return View(ofertalaboral.ToList());
         }
 
@@ -41,6 +40,7 @@ namespace WebBS.Controllers
         public ActionResult Create()
         {
             ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre");
+            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSurcursal", "Nombre");
             return View();
         }
 
@@ -49,19 +49,17 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,FuncionesAdicionales,TiempoValidez,FechaCrea")] OfertaLaboral ofertalaboral)
+        public ActionResult Create([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,IdEstado")] OfertaLaboral ofertalaboral)
         {
             if (ModelState.IsValid)
             {
-                OfertaLaboral last_oferta = db.OfertaLaboral.OrderByDescending(u => u.IdOfertaLaboral).FirstOrDefault();
-
-                ofertalaboral.IdOfertaLaboral = last_oferta.IdOfertaLaboral + 1;
                 db.OfertaLaboral.Add(ofertalaboral);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre", ofertalaboral.IdPerfil);
+            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSurcursal", "Nombre", ofertalaboral.IdSucursal);
             return View(ofertalaboral);
         }
 
@@ -78,6 +76,7 @@ namespace WebBS.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre", ofertalaboral.IdPerfil);
+            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSurcursal", "Nombre", ofertalaboral.IdSucursal);
             return View(ofertalaboral);
         }
 
@@ -86,7 +85,7 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,FuncionesAdicionales,TiempoValidez,FechaCrea")] OfertaLaboral ofertalaboral)
+        public ActionResult Edit([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,IdEstado")] OfertaLaboral ofertalaboral)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +94,7 @@ namespace WebBS.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre", ofertalaboral.IdPerfil);
+            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSurcursal", "Nombre", ofertalaboral.IdSucursal);
             return View(ofertalaboral);
         }
 

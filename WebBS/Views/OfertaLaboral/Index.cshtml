@@ -1,32 +1,19 @@
 ﻿@model IEnumerable<WebBS.Models.OfertaLaboral>
 
 @{
-    ViewBag.Title = "Lista de Ofertas Laborales";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Ofertas Laborales</h2>
+<h2>Index</h2>
 
 <p>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="form-group">
-                <div class="col-xs-12">
-                    <a class="btn btn-primary" href="~/OfertaLaboral/Create">Nueva Oferta</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            Perfil
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FuncionesAdicionales)
@@ -37,7 +24,15 @@
         <th>
             @Html.DisplayNameFor(model => model.FechaCrea)
         </th>
-       
+        <th>
+            @Html.DisplayNameFor(model => model.IdEstado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfil.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sucursal.Nombre)
+        </th>
         <th></th>
     </tr>
 
@@ -47,23 +42,27 @@
             @Html.DisplayFor(modelItem => item.Titulo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Perfil.Nombre)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.FuncionesAdicionales)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TiempoValidez)
         </td>
         <td>
-
             @Html.DisplayFor(modelItem => item.FechaCrea)
         </td>
-        
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdOfertaLaboral }) |
-            @Html.ActionLink("Ver", "Details", new { id=item.IdOfertaLaboral }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdOfertaLaboral })
+            @Html.DisplayFor(modelItem => item.IdEstado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfil.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdOfertaLaboral }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdOfertaLaboral }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdOfertaLaboral })
         </td>
     </tr>
 }

@@ -23,10 +23,10 @@ namespace WebBS.Models
         public Nullable<int> IdPuesto { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+        public string Competencias { get; set; }
         public string Caracteristicas { get; set; }
         public Nullable<decimal> SueldoIni { get; set; }
         public Nullable<decimal> SueldoFin { get; set; }
-        public string Competencias { get; set; }
         public double Estado { get; set; }
     
         public virtual ICollection<OfertaLaboral> OfertaLaboral { get; set; }
