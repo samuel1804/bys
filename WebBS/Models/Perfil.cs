@@ -29,6 +29,7 @@ namespace WebBS.Models
         public string Descripcion { get; set; }
         public string Competencias { get; set; }
         public string Caracteristicas { get; set; }
+
         public Nullable<decimal> SueldoIni { get; set; }
         public Nullable<decimal> SueldoFin { get; set; }
         public int Estado { get; set; }
