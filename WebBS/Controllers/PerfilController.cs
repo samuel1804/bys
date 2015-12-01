@@ -52,7 +52,7 @@ namespace WebBS.Controllers
         {
             if (ModelState.IsValid)
             {
-                perfil.IdPerfil = db.Perfil.OrderBy(t => t.IdPerfil).FirstOrDefault().IdPerfil + 1;
+                perfil.IdPerfil = db.Perfil.OrderByDescending(t => t.IdPerfil).FirstOrDefault().IdPerfil + 1;
                 perfil.Estado = 1;
                 db.Perfil.Add(perfil);
                 db.SaveChanges();

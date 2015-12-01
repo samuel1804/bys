@@ -11,12 +11,16 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class OfertaLaboral
     {
         public int IdOfertaLaboral { get; set; }
+        [Required(ErrorMessage = "Ingrese el Titulo")]
         public string Titulo { get; set; }
+        [Required(ErrorMessage = "Seleccione un Perfil")]
         public int IdPerfil { get; set; }
+        [Required(ErrorMessage = "Seleccione una Sucursal")]
         public int IdSucursal { get; set; }
         public string FuncionesAdicionales { get; set; }
         public Nullable<int> TiempoValidez { get; set; }

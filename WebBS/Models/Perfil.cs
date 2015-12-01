@@ -11,6 +11,7 @@ namespace WebBS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Perfil
     {
@@ -20,8 +21,11 @@ namespace WebBS.Models
         }
     
         public int IdPerfil { get; set; }
+        [Required(ErrorMessage = "Seleccione un Puesto")]
         public int IdPuesto { get; set; }
+        [Required (ErrorMessage="Ingrese el Nombre del Perfil")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "Ingrese una Descripcion del Perfil")]
         public string Descripcion { get; set; }
         public string Competencias { get; set; }
         public string Caracteristicas { get; set; }
