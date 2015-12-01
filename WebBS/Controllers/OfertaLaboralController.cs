@@ -39,7 +39,7 @@ namespace WebBS.Controllers
         // GET: /OfertaLaboral/Create
         public ActionResult Create()
         {
-
+            ViewBag.TiempoValidez = 30;
             ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre");
             ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSurcursal", "Nombre");
             return View();
@@ -56,6 +56,7 @@ namespace WebBS.Controllers
             {
                 ofertalaboral.IdOfertaLaboral = db.OfertaLaboral.OrderByDescending(t => t.IdOfertaLaboral).FirstOrDefault().IdOfertaLaboral+1;
                 ofertalaboral.Estado = 1;
+                ofertalaboral.TiempoValidez = 30;
                 db.OfertaLaboral.Add(ofertalaboral);
                 db.SaveChanges();
                 return RedirectToAction("Index");

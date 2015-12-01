@@ -54,8 +54,8 @@
         <div class="form-group">
             @Html.Label("Tiempo Validez", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TiempoValidez)
-                @Html.ValidationMessageFor(model => model.TiempoValidez)
+                @Html.TextBoxFor(model=>model.TiempoValidez, new { @readonly = "readonly",@Value="30" } )
+      
             </div>
         </div>
 
