@@ -39,6 +39,7 @@ namespace WebBS.Controllers
         // GET: /OfertaLaboral/Create
         public ActionResult Create()
         {
+
             ViewBag.IdPerfil = new SelectList(db.Perfil, "IdPerfil", "Nombre");
             ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSurcursal", "Nombre");
             return View();
@@ -51,7 +52,6 @@ namespace WebBS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="IdOfertaLaboral,Titulo,IdPerfil,IdSucursal,FuncionesAdicionales,TiempoValidez,FechaCrea,Estado")] OfertaLaboral ofertalaboral)
         {
-
             if (ModelState.IsValid)
             {
                 ofertalaboral.IdOfertaLaboral = db.OfertaLaboral.OrderByDescending(t => t.IdOfertaLaboral).FirstOrDefault().IdOfertaLaboral+1;
