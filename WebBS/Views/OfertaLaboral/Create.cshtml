@@ -192,7 +192,7 @@
             $("#IdPerfil").change(function () {
                 $("#Descripcion").empty();
                 $("#Caracteristicas").empty();
-                alert("hola");
+                
                 $.ajax({
                     type: 'POST',
                     url: '@Url.Action("GetPerfil")', // we are calling json method
@@ -207,7 +207,7 @@
                         // states contains the JSON formatted list
                         // of states passed from the controller
 
-                        alert("hola");
+                      
                         $("#Descripcion").val("SA");
                             // here we are adding option for States
 

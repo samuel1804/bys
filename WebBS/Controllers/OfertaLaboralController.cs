@@ -108,7 +108,7 @@ namespace WebBS.Controllers
             }
             if (Request.IsAjaxRequest())
             {
-                return Json(perfil);
+                return Json(new { Caracteristicas = perfil.Caracteristicas, Descripcion = perfil.Descripcion });
             }
             else
             {
