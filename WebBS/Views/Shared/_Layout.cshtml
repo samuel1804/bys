@@ -20,6 +20,21 @@
     <script type="text/javascript">
         var urlPath = '@Url.Content("~")';
         toastr.options = { "progressBar": false, "positionClass": "toast-bottom-right", "closeButton": true, "showMethod": "slideDown" }
+    
+    
+   
+    
+    </script>
+
+    <script type="text/javascript">
+    @if (TempData["notice"] != null)
+    {
+        
+        @:alert('@TempData["notice"]');
+    }
+    
+
+  
     </script>
 </head>
 <body>

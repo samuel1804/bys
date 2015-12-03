@@ -26,7 +26,11 @@ namespace WebBS.Models
         public Nullable<int> TiempoValidez { get; set; }
         public Nullable<System.DateTime> FechaCrea { get; set; }
         public int Estado { get; set; }
-    
+
+        public int IdArea { get; set; }
+
+        public int IdPuesto { get; set; }
+
         public virtual Perfil Perfil { get; set; }
         public virtual Sucursal Sucursal { get; set; }
     }

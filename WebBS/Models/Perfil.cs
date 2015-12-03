@@ -19,7 +19,8 @@ namespace WebBS.Models
         {
             this.OfertaLaboral = new HashSet<OfertaLaboral>();
         }
-    
+        [Required(ErrorMessage = "Seleccione un Area")]
+        public int IdArea { get; set; }
         public int IdPerfil { get; set; }
         [Required(ErrorMessage = "Seleccione un Puesto")]
         public int IdPuesto { get; set; }
@@ -33,7 +34,8 @@ namespace WebBS.Models
         public Nullable<decimal> SueldoIni { get; set; }
         public Nullable<decimal> SueldoFin { get; set; }
         public int Estado { get; set; }
-    
+
+
         public virtual Puesto Puesto { get; set; }
         public virtual ICollection<OfertaLaboral> OfertaLaboral { get; set; }
     }

@@ -39,6 +39,7 @@ namespace WebBS.Controllers
         // GET: /Perfil/Create
         public ActionResult Create()
         {
+            ViewBag.IdArea = new SelectList(db.Area, "IdArea", "Nombre");
             ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre");
             return View();
         }
@@ -48,20 +49,87 @@ namespace WebBS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="IdPerfil,IdPuesto,Nombre,Descripcion,Competencias,Caracteristicas,SueldoIni,SueldoFin,Estado")] Perfil perfil)
+        public ActionResult Create([Bind(Include="IdArea,IdPerfil,IdPuesto,Nombre,Descripcion,Competencias,Caracteristicas,SueldoIni,SueldoFin,Estado")] Perfil perfil)
         {
+                 if (Request.Form["btnCancelar"] != null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                 ViewBag.IdArea = new SelectList(db.Area, "IdArea", "Nombre", perfil.IdArea);
+                 ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre", perfil.IdPuesto);
+                
+
             if (ModelState.IsValid)
             {
                 perfil.IdPerfil = db.Perfil.OrderByDescending(t => t.IdPerfil).FirstOrDefault().IdPerfil + 1;
                 perfil.Estado = 1;
                 db.Perfil.Add(perfil);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.IdPuesto = new SelectList(db.Puesto, "IdPuesto", "Nombre", perfil.IdPuesto);
-            return View(perfil);
+                TempData["notice"] = "Perfil Registrado";
+                
+
+
+
+                if (Request.Form["btnRegistrar"] != null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else if (Request.Form["btnRegistrarMas"] != null)
+                {
+                    return RedirectToAction("Create");
+                }
+                else if (Request.Form["btnImprimir"] != null)
+                {
+                    return RedirectToAction("Create");
+                }
+                else {
+                    return RedirectToAction("Index");
+                }
+
+            }
+            else
+            {
+
+                GetPuestos(""+perfil.IdArea);
+             
+                return View(perfil);
+            }
         }
+
+      
+        [HttpPost]
+        public JsonResult  GetPuestos(string id = "")
+        {
+            List<Puesto> puestos = new List<Puesto>();
+            puestos.Add(new Puesto() { IdPuesto = 0, Nombre = "Seleccione" });
+            int ID = 0;
+            if (int.TryParse(id, out ID))
+            {
+
+                puestos.AddRange(db.Puesto.Where(a => a.IdArea == ID).ToList());
+                    
+               
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new SelectList(puestos, "IdPuesto", "Nombre"));
+            }
+            else
+            {
+                return new JsonResult
+                {
+                    Data = "Not valid request",
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                };
+            }
+        }
+
+
+
+  
+
 
         // GET: /Perfil/Edit/5
         public ActionResult Edit(int? id)
